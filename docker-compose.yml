@@ -3,7 +3,7 @@ services:
     container_name: pyapp # 管理しやすいようにサービス名とコンテナー名は統一
     build:
       context: ./app # app ディレクトリがビルドする際のカレントディレクトリとなるよう指定
-      dockerfile: Dockerfile.dev # dockerfileはホットリロード対応のテスト用と本番用で分けてある
+      dockerfile: Dockerfile # dockerfileはホットリロード対応のテスト用と本番用で分けてある
     ports:
       - 5000:5000
     volumes:

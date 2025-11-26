@@ -1,0 +1,38 @@
+services:
+  pyapp: # 管理しやすいようにサービス名とコンテナー名は統一
+    container_name: pyapp # 管理しやすいようにサービス名とコンテナー名は統一
+    build:
+      context: ./app # app ディレクトリがビルドする際のカレントディレクトリとなるよう指定
+      dockerfile: Dockerfile.dev # dockerfileはホットリロード対応のテスト用と本番用で分けてある
+    ports:
+      - 5000:5000
+    volumes:
+      - ./app/src:/app/src
+    environment:
+      TZ: Asia/Tokyo # タイムゾーンを設定
+      FLASK_APP: run.py # 
+      FLASK_ENV: development # 
+    depends_on:
+      pydb:
+        condition: service_healthy # mysqlが起動するまで待つ
+
+  pydb:
+    image: mysql:8.0
+    container_name: pydb
+    ports: 
+      - "3306:3306"
+    volumes:
+      - pydb-data:/var/lib/mysql # init.sqlを使用する場合は名前付きボリュームを作成
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pydb
+    healthcheck:
+      test: ["CMD", "mysql", "-u", "root", "-proot"] # mysとの疎通確認コマンド
+      interval: 5s
+      timeout: 60s
+      retries: 5
+
+volumes:
+  pydb-data: # 名前付きボリューム指定

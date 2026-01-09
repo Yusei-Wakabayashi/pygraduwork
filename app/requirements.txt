@@ -2,5 +2,7 @@ Flask
 sqlalchemy
 flask-sqlalchemy
 flask-migrate
+flask-seeder
 pymysql
-python-dotenv 
+python-dotenv
+cryptography

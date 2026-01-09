@@ -1,0 +1,55 @@
+body
+{
+    background-image: repeating-linear-gradient(
+        to bottom right,
+        hsl(0deg, 80%, 50%),
+        hsl(60deg, 80%, 50%),
+        hsl(120deg, 80%, 50%),
+        hsl(180deg, 80%, 50%),
+        hsl(240deg, 80%, 50%),
+        hsl(300deg, 80%, 50%),
+        hsl(360deg, 80%, 50%) 50%
+    );
+    background-size: 1000% 1000%;
+    animation: colorRotation 240s linear 0s infinite;
+    margin: 0;
+}
+@keyframes colorRotation
+{
+	from
+    {
+		background-position: 0 0;
+	}
+	to
+    {
+		background-position: 500% 500%;
+	}
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.anotherpage
+{
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    font-family: "sans-serif";
+    font-size: 10vh;
+    color: #ffffff;
+}
+
+.title
+{
+    position: absolute;
+    width: 80vw;
+    height: 20vh;
+    top: 35vh;
+    line-height: 20vh;
+    margin: 0 10vw 0 10vw;
+	background:linear-gradient(#ffffff,#000000);
+	-webkit-background-clip:text;
+	-webkit-text-fill-color: transparent;
+}

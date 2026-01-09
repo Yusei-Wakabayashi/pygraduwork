@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_seeder import FlaskSeeder
 
 db = SQLAlchemy()
 
@@ -10,12 +12,12 @@ def create_app():
 
     # DBの設定
     db.init_app(app)
-    from flask_app import models
-
+    Migrate(app, db)
+    # Seederの設定
+    FlaskSeeder(app, db)
+    
     # Blueprintの登録
     from flask_app.controllers.index import index_bp
-    from flask_app.controllers.sample import sample_bp
     app.register_blueprint(index_bp)
-    app.register_blueprint(sample_bp)
 
     return app

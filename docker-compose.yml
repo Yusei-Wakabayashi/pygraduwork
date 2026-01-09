@@ -1,20 +1,20 @@
 services:
-  pyapp: # 管理しやすいようにサービス名とコンテナー名は統一
-    container_name: pyapp # 管理しやすいようにサービス名とコンテナー名は統一
+  pyapp:
+    container_name: pyapp
     build:
-      context: ./app # app ディレクトリがビルドする際のカレントディレクトリとなるよう指定
-      dockerfile: Dockerfile # dockerfileはホットリロード対応のテスト用と本番用で分けてある
+      context: ./app
+      dockerfile: Dockerfile
     ports:
       - 5000:5000
     volumes:
-      - ./app/src:/app/src
+      - ./app:/app   # ← ここを1本にする
     environment:
-      TZ: Asia/Tokyo # タイムゾーンを設定
-      FLASK_APP: run.py # 
-      FLASK_ENV: development # 
+      TZ: Asia/Tokyo
+      FLASK_APP: run.py
+      FLASK_ENV: development
     depends_on:
       pydb:
-        condition: service_healthy # mysqlが起動するまで待つ
+        condition: service_healthy
 
   pydb:
     image: mysql:8.0

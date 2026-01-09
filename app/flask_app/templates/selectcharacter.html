@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select your character</title>
+    <link rel="stylesheet" href="/static/css/selectcharacter.css">
+</head>
+<body>
+    <script src="/static/js/selectcharacter.js"></script>
+    <a href="/title" class="link">
+        タイトルへ戻る
+    </a>
+
+    <!-- <a href="/add/character"> -->
+        <div id="add" class="newcharacter">
+            <img src="/static/image/addchar.png" alt="" class="newcharacter">
+            <div class="text">新規作成</div>
+            <script>
+                addchar = document.getElementById("add");
+                addchar.addEventListener("click", function() {addcharacter()})
+            </script>
+        </div>
+    <!-- </a> -->
+
+    <div id="characterlist">キャラクター領域</div>
+
+    <script>
+        window.onload = function() {characterlist()};
+    </script>
+</body>
+</html>
